@@ -2,12 +2,14 @@ function initBind() {
 	console.log("init success");
 	//增加特定按钮
 	var href = window.location.href;
+	//只能从详细页获取视频地址，所以首页和列表页面没有用处
 	setTimeout(function() {
 		if(href.indexOf("page-index.html") >0){
 			//首页
 			//homeVideo();
 		}else if(href.indexOf("page-topic-details.html") >0){
 			//话题列表页面
+			//topicVideo();
 		}else if(href.indexOf("page-feed.html") >0){
 			//详细页面
 			detailVideo();
@@ -17,6 +19,17 @@ function initBind() {
 //定时加按钮
 function homeVideo(){
 	$(".j-feed-item:not(.exists)").each(function(){
+		var vinfo=$("<div class='get_video_info'>GET LINK</div>");
+		var href=$(this).find("a").eq(0).attr("href");
+		vinfo.data("link",href);
+		$(this).append(vinfo);
+		
+		showText2(vinfo);
+		$(this).addClass("exists");
+	});
+}
+function topicVideo(){
+	$(".figure-item:not(.exists)").each(function(){
 		var vinfo=$("<div class='get_video_info'>GET LINK</div>");
 		var href=$(this).find("a").eq(0).attr("href");
 		vinfo.data("link",href);
@@ -47,6 +60,7 @@ function showText2(ele){
 	$(ele).mouseover(function(){
 		//console.log($(this).data());
 		var data=$(this).data();
+		$("#video_result").prepend($("<div>").html(escapeHTML("http://shaka.qq.com"+data["link"])));
 		$("#video_result").prepend("<div>------------------------------</div>");
 		/*$.each(data, function(ind,ele1) {
 			$("#video_result").prepend($("<div>").html(escapeHTML(ele1)));

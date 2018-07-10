@@ -21,7 +21,8 @@
 			]
 		}, {
 			"matches": [
-				"*://*.douyin.com/*"
+				"*://*.douyin.com/*",
+				"*://*.iesdouyin.com/*"
 			],
 			"js": [
 				"jquery-2.2.3.min.js",
